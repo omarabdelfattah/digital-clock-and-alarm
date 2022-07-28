@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>digital clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="box">
+            <div class="clock">
+
+                <div class="days">
+                    <ul>
+                        <li id="day0"  >SUN</li>
+                        <li id="day1"  >MON</li>
+                        <li id="day2"  >TUE</li>
+                        <li id="day3" class="highlighted" >WED</li>
+                        <li id="day4"  >THU</li>
+                        <li id="day5"  >FRI</li>
+                        <li id="day6"  >SAT</li>
+                    </ul>
+                </div>
+    
+                <div class="alarm">
+                    <span class="light">alarm</span>
+                </div>
+    
+                <div class="time">
+                    <ul class="digits">
+                        <li id="digit1" class="highlighted" >04</li><span class="highlighted" >:</span>
+                        <li id="digit2" class="highlighted" >17</li><span class="highlighted" >:</span>
+                        <li id="digit3" class="highlighted" >36</li>
+                    </ul>
+                </div>
+    
+                <div class="period">
+                    <span id="period" class="highlighted" >PM</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper2">
+        <div class="box">
+            <h2>SET ALARM AFTER</h2>
+            <div class=" child_box hours">
+                <h3>HOURS</h3>
+                <input type="number" name="timer_digit1" id="timer_digit1" value=0>
+            </div>
+            <div class=" child_box hours">
+                <h3>MINUTES</h3>
+                <input type="number" name="timer_digit2" id="timer_digit2" value=0>
+            </div>
+            <div class=" child_box hours">
+                <h3>SECONDS</h3>
+                <input type="number" name="timer_digit3" id="timer_digit3" value=0>
+            </div>
+            <div class="buttons">
+                <button class="blue" onclick="startTimer()">Set</button>
+                <button class="red"  onclick="clearTimer()">Clear</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let clock_digits = document.getElementById('digits');
+
+        let clock_digit1 = document.getElementById('digit1');
+        let clock_digit2 = document.getElementById('digit2');
+        let clock_digit3 = document.getElementById('digit3');
+        
+        let clock_period = document.getElementById('period');
+
+        let timerSwitch  = false;
+        let startTime    = 0;
+        
+        let timer_digit1 = document.getElementById('timer_digit1');
+        let timer_digit2 = document.getElementById('timer_digit2');
+        let timer_digit3 = document.getElementById('timer_digit3');
+
+        setInterval(function(){
+            let currentTime = getTime();
+            clock_digit1.innerHTML = currentTime['hours'];
+            clock_digit2.innerHTML = currentTime["minutes"];
+            clock_digit3.innerHTML = currentTime["seconds"];
+            clock_period.innderHTML= currentTime["period"];
+
+            let dayId = "day"+currentTime['day'];
+            for(i=0;i<6;i++){
+                if(i==currentTime['day']){
+                    document.getElementById("day"+i).classList.add('highlighted');
+                }else{
+                    document.getElementById("day"+i).classList.remove('highlighted');
+                }
+            }   
+
+
+            // check timer
+            if(timerSwitch){
+                console.log("current:",currentTime);
+                console.log(timer_digit1.value+" "+timer_digit2.value+" "+timer_digit3.value)
+
+                if(currentTime['hours'] <= 0 && currentTime['period'] == 'am' ){
+                    currentTime['hours'] += 12;
+                }
+
+                h = Math.abs( currentTime['hours'] - startTime['hours']  );
+                m = Math.abs( (currentTime['minutes'] - startTime['minutes'])) ;
+                s = Math.abs( (currentTime['seconds'] - startTime['seconds'])) ;
+               
+                console.log(h,m,s);
+
+                if(    h ==  timer_digit1.value && 
+                       m == timer_digit2.value  &&
+                       s == timer_digit3.value
+                ){
+                    alert("timer has finished " + timer_digit1.value + ":"+timer_digit2.value + ":"+timer_digit3.value + " " )
+                    clearTimer();
+                }
+
+            }
+
+        },1000)
+
+
+        let mystopwatchInerval ;
+        let startingTime;
+        function getTime(){
+                let out_time = [];
+                let time = new Date();
+                let day = time.getDay();
+                time = time.toLocaleTimeString().split(" ");
+                
+                digits = time[0].split(":");
+
+                out_time['hours'] = digits[0];
+                out_time['minutes'] = digits[1];
+                out_time['seconds'] = digits[2];
+                out_time['period'] = time[1];
+                out_time['day'] = day;
+            
+                return out_time;
+
+        }
+
+        function startTimer(){
+            if(timerSwitch == false){
+
+                timerSwitch = true;
+
+                timer_digit1.disabled = true;
+                timer_digit2.disabled = true;
+                timer_digit3.disabled = true;
+
+                startTime   = getTime();
+
+            }
+            
+        }
+        function clearTimer(){
+            timerSwitch = false;
+            timer_digit1.value = 0;
+            timer_digit2.value = 0;
+            timer_digit3.value = 0;
+
+            startTime    = 0;
+       
+            timer_digit1.disabled = false;
+            timer_digit2.disabled = false;
+            timer_digit3.disabled = false;
+
+        }
+
+    </script>
+</body>
+</html>

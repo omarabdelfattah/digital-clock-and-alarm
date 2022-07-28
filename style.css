@@ -1,0 +1,95 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+.wrapper{
+    background-color: #dbe3e6;
+    padding: 62px 0px;
+    font-family: cursive;
+}
+.wrapper .box{
+    max-width: 35%;
+    margin: auto;
+    padding: 46px;
+    background-color: white;
+
+}
+.wrapper .box .clock{
+    background-color: #dddddd;
+    text-align: center;
+    padding: 1px 6px;
+    color: #9a9797;
+}
+ul {
+    padding: 0;
+}
+.clock .days ul li{
+    display: inline-block;
+    margin: 0 10px;
+}
+.clock .highlighted{
+    color:black;
+}
+.clock .alarm{
+    max-width: 10%;
+    display: inline-block;
+}
+.clock .time{
+    max-width: 80%;
+    display: inline-block;
+}
+.clock .period{
+    max-width: 10%;
+    display: inline-block;
+}
+.clock .time ul li{
+    display: inline-block;
+    margin: 0 4px;
+    font-size: xx-large;
+}
+.clock .time ul {
+    margin: 15px 42px;
+}
+.clock .time ul  span{
+
+    font-size: xx-large;
+}
+.wrapper2{
+    background-color: #afb4b7;
+}
+.wrapper2 .box {
+    text-align: center;
+    font-family: sans-serif;
+    color: #5e5e5e;
+}
+.child_box {
+    width: 30%;
+    display: inline-block;
+    background-color: #afb4b75c;
+    text-align: center;
+    margin: 32px 7px;
+
+}
+.child_box input{
+    color: black;
+    background-color: white;
+    width: 40%;
+    padding: 13px;
+    margin: 26px auto;
+    border: 0;
+}
+.blue{
+    background-color: #4a4afc;
+}
+.red{
+    background-color: #e73644;
+}
+.buttons button{
+    color: white;
+    border: 0;
+    width: 57px;
+    padding: 10px;
+    margin: 0 4px;
+    border-radius: 9px;
+    font-family: monospace;
+}
