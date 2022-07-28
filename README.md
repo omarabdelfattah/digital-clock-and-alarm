@@ -1,4 +1,9 @@
 
+## Demo
+
+https://omarabdelfattah.github.io/digital-clock-and-alarm/
+
+
 # The Clock
 
 Digital Clock with day , time and AM/PM.
